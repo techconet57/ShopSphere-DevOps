@@ -1,0 +1,9 @@
+{
+  "name": "shopsphere-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "node test.js",
+    "build": "node -e \"console.log('Static frontend build OK')\""
+  }
+}

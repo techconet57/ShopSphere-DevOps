@@ -1,0 +1,7 @@
+.env
+node_modules/
+npm-debug.log*
+*.pem
+*.key
+.ssh/
+ansible/inventory/group_vars/*/vault.yml

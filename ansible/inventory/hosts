@@ -1,0 +1,8 @@
+[production]
+shopsphere-server ansible_host=192.168.185.21
+
+[production:vars]
+ansible_user=sam
+ansible_python_interpreter=/usr/bin/python3
+# Add this only if passwordless SSH is not already configured:
+# ansible_ssh_private_key_file=~/.ssh/ansible_ed25519
