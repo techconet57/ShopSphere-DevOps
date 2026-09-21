@@ -4,6 +4,7 @@
   become: true
 
   vars:
+    app_dir: /opt/shopsphere
     compose_file: "{{ app_dir }}/docker-compose.yml"
 
   tasks:
