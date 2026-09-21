@@ -1,7 +1,10 @@
 app_dir: /opt/shopsphere
+
 frontend_image: ghcr.io/techconet57/shopsphere-frontend:latest
 backend_image: ghcr.io/techconet57/shopsphere-backend:latest
+
 postgres_db: shopsphere
 postgres_user: shopsphere
-postgres_password: "shopsphere@321"
-# Store real production secrets with Ansible Vault, not in Git.
+
+# Set the real password using Ansible Vault.
+postgres_password: CHANGE_ME

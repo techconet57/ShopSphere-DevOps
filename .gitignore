@@ -5,3 +5,8 @@ npm-debug.log*
 *.key
 .ssh/
 ansible/inventory/group_vars/*/vault.yml
+# Ansible production secrets
+ansible/inventory/group_vars/production.yml
+
+# Ansible Vault password file
+.vault_pass
