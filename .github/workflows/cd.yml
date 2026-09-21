@@ -57,6 +57,13 @@ jobs:
           ansible production \
             -i ansible/inventory/hosts \
             -m ping
+      
+      - name: Create Ansible Vault password file
+        env:
+          ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+        run: |
+          printf '%s' "$ANSIBLE_VAULT_PASSWORD" > "$RUNNER_TEMP/vault_password"
+          chmod 600 "$RUNNER_TEMP/vault_password"      
 
       - name: Deploy with Ansible
         env:
@@ -66,4 +73,5 @@ jobs:
             -i ansible/inventory/hosts \
             -e "frontend_image=ghcr.io/${IMAGE_OWNER}/shopsphere-frontend:${GITHUB_SHA}" \
             -e "backend_image=ghcr.io/${IMAGE_OWNER}/shopsphere-backend:${GITHUB_SHA}" \
-            ansible/playbooks/site.yml
+            ansible/playbooks/deploy.yml \
+            --vault-password-file "$RUNNER_TEMP/vault_password"
