@@ -1,0 +1,23 @@
+[33mcommit e70a8b84a31d9a67dff4ec379058b0ef9f6443ca[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Sam Raut <rautshyam218@gmail.com>
+Date:   Sun Sep 20 11:59:52 2026 +0545
+
+    trigger CD on main
+
+[33mcommit 25abf897d7ca9f70894a0c5c9d265b386df1cca9[m
+Author: Sam Raut <rautshyam218@gmail.com>
+Date:   Sun Sep 20 11:45:01 2026 +0545
+
+    seting self-hosted runner
+
+[33mcommit 243d0e2a28c310c868a7cda0ddc5ea93082c0bc7[m
+Author: Sam Raut <rautshyam218@gmail.com>
+Date:   Sat Sep 19 16:26:55 2026 +0545
+
+    Use GHCR images in production compose
+
+[33mcommit da38fd0bffe973490041a0272b87378df0c57331[m
+Author: Shyam Raut <133948752+techconet57@users.noreply.github.com>
+Date:   Sat Sep 19 15:33:01 2026 +0545
+
+    Initial commit
