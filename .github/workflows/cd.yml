@@ -60,9 +60,9 @@ jobs:
       
       - name: Create Ansible Vault password file
         env:
-          ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+          VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
         run: |
-          printf '%s' "$ANSIBLE_VAULT_PASSWORD" > "$RUNNER_TEMP/vault_password"
+          printf '%s' "$VAULT_PASSWORD" > "$RUNNER_TEMP/vault_password"
           chmod 600 "$RUNNER_TEMP/vault_password"      
 
       - name: Deploy with Ansible
