@@ -52,18 +52,26 @@ jobs:
         run: |
           ansible-galaxy collection install community.docker
 
-      - name: Verify deployment host
-        run: |
-          ansible production \
-            -i ansible/inventory/hosts \
-            -m ping
-      
       - name: Create Ansible Vault password file
         env:
           VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
         run: |
+          if [ -z "$VAULT_PASSWORD" ]; then
+            echo "ANSIBLE_VAULT_PASSWORD secret is missing"
+            exit 1
+          fi
+
           printf '%s' "$VAULT_PASSWORD" > "$RUNNER_TEMP/vault_password"
-          chmod 600 "$RUNNER_TEMP/vault_password"      
+          chmod 600 "$RUNNER_TEMP/vault_password"
+
+      - name: Verify deployment host
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: "False"
+        run: |
+          ansible production \
+            -i ansible/inventory/hosts \
+            --vault-password-file "$RUNNER_TEMP/vault_password" \
+            -m ping
 
       - name: Deploy with Ansible
         env:
@@ -71,7 +79,7 @@ jobs:
         run: |
           ansible-playbook \
             -i ansible/inventory/hosts \
-            -e "frontend_image=ghcr.io/${IMAGE_OWNER}/shopsphere-frontend:${GITHUB_SHA}" \
-            -e "backend_image=ghcr.io/${IMAGE_OWNER}/shopsphere-backend:${GITHUB_SHA}" \
-            ansible/playbooks/deploy.yml \
-            --vault-password-file "$RUNNER_TEMP/vault_password"
+            --vault-password-file "$RUNNER_TEMP/vault_password" \
+            -e "frontend_image=ghcr.io/${{ github.repository_owner }}/shopsphere-frontend:${{ github.sha }}" \
+            -e "backend_image=ghcr.io/${{ github.repository_owner }}/shopsphere-backend:${{ github.sha }}" \
+            ansible/playbooks/deploy.yml
